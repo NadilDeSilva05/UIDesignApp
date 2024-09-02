@@ -2,6 +2,11 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
+// Import local images
+import appleIcon from '../assets/apple.png';
+import googleIcon from '../assets/google.png';
+import facebookIcon from '../assets/facebook.png';
+
 export default function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -48,19 +53,19 @@ export default function SignIn() {
       <View style={styles.socialIconsContainer}>
         <TouchableOpacity>
           <Image
-            source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/a/ab/Apple-logo.png' }}
+            source={appleIcon}
             style={styles.socialIcon}
           />
         </TouchableOpacity>
         <TouchableOpacity>
           <Image
-            source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg' }}
+            source={googleIcon}
             style={styles.socialIcon}
           />
         </TouchableOpacity>
         <TouchableOpacity>
           <Image
-            source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg' }}
+            source={facebookIcon}
             style={styles.socialIcon}
           />
         </TouchableOpacity>

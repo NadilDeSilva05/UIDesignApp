@@ -4,6 +4,11 @@ import { Ionicons } from '@expo/vector-icons';
 import { Picker } from '@react-native-picker/picker';
 import Checkbox from 'expo-checkbox'; // or '@react-native-community/checkbox'
 
+// Import local images
+import appleIcon from '../assets/apple.png';
+import googleIcon from '../assets/google.png';
+import facebookIcon from '../assets/facebook.png';
+
 export default function SignUp() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -74,19 +79,19 @@ export default function SignUp() {
       <View style={styles.socialIconsContainer}>
         <TouchableOpacity>
           <Image
-            source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/a/ab/Apple-logo.png' }}
+            source={appleIcon}
             style={styles.socialIcon}
           />
         </TouchableOpacity>
         <TouchableOpacity>
           <Image
-            source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg' }}
+            source={googleIcon}
             style={styles.socialIcon}
           />
         </TouchableOpacity>
         <TouchableOpacity>
           <Image
-            source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg' }}
+            source={facebookIcon}
             style={styles.socialIcon}
           />
         </TouchableOpacity>
