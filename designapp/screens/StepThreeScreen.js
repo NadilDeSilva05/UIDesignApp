@@ -1,9 +1,11 @@
 import React from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, StatusBar } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
-
-export default function StepThreeScreen({ navigation }) {
+import { useNavigation } from '@react-navigation/native';
+export default function StepThreeScreen() {
+    const navigation = useNavigation();
   return (
+    
     <View style={styles.container}>
       <StatusBar barStyle="dark-content" />
       
@@ -46,7 +48,7 @@ export default function StepThreeScreen({ navigation }) {
       <Text style={styles.InstituteText}>Last Name</Text>
       <TextInput style={styles.input} placeholder="Last Name" />
 
-      <TouchableOpacity style={styles.nextButton}>
+      <TouchableOpacity style={styles.nextButton}onPress= {() => navigation.navigate('Dashboard')}>
         <Text style={styles.nextButtonText}>Next</Text>
       </TouchableOpacity>
     </View>

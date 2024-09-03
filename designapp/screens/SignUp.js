@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Picker } from '@react-native-picker/picker';
@@ -10,6 +10,50 @@ import appleIcon from '../assets/apple.png';
 import googleIcon from '../assets/google.png';
 import facebookIcon from '../assets/facebook.png';
 
+const PasswordInput = memo(({ password, setPassword, showPassword, setShowPassword }) => (
+  <View style={styles.passwordContainer}>
+    <TextInput
+      style={styles.inputPassword}
+      placeholder="Password"
+      secureTextEntry={!showPassword}
+      value={password}
+      onChangeText={setPassword}
+      accessibilityLabel="Password input"
+    />
+    <TouchableOpacity onPress={() => setShowPassword(!showPassword)} accessibilityLabel="Toggle password visibility">
+      <Ionicons name={showPassword ? 'eye-off-outline' : 'eye-outline'} size={24} color="gray" />
+    </TouchableOpacity>
+  </View>
+));
+
+const CheckboxWithLabel = memo(({ isChecked, setIsChecked }) => (
+  <View style={styles.checkboxContainer}>
+    <Checkbox
+      value={isChecked}
+      onValueChange={setIsChecked}
+      style={styles.checkbox}
+      accessibilityLabel="Agree with terms and conditions"
+    />
+    <Text style={styles.checkboxText}>
+      Agree with <Text style={styles.linkText}>Terms & condition</Text>
+    </Text>
+  </View>
+));
+
+const SocialSignUp = memo(() => (
+  <View style={styles.socialIconsContainer}>
+    <TouchableOpacity accessibilityLabel="Sign up with Apple">
+      <Image source={appleIcon} style={styles.socialIcon} />
+    </TouchableOpacity>
+    <TouchableOpacity accessibilityLabel="Sign up with Google">
+      <Image source={googleIcon} style={styles.socialIcon} />
+    </TouchableOpacity>
+    <TouchableOpacity accessibilityLabel="Sign up with Facebook">
+      <Image source={facebookIcon} style={styles.socialIcon} />
+    </TouchableOpacity>
+  </View>
+));
+
 export default function SignUp() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -20,8 +64,6 @@ export default function SignUp() {
   const navigation = useNavigation();
 
   const handleSignUp = () => {
-    // Add your sign-up logic here
-    // After successful sign-up, navigate to RegistrationCompletedScreen
     navigation.navigate('RegistrationCompletedScreen');
   };
 
@@ -36,28 +78,21 @@ export default function SignUp() {
         keyboardType="email-address"
         value={email}
         onChangeText={setEmail}
+        accessibilityLabel="Email input"
       />
-      <View style={styles.passwordContainer}>
-        <TextInput
-          style={styles.inputPassword}
-          placeholder="Password"
-          secureTextEntry={!showPassword}
-          value={password}
-          onChangeText={setPassword}
-        />
-        <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-          <Ionicons
-            name={showPassword ? 'eye-off-outline' : 'eye-outline'}
-            size={24}
-            color="gray"
-          />
-        </TouchableOpacity>
-      </View>
+
+      <PasswordInput
+        password={password}
+        setPassword={setPassword}
+        showPassword={showPassword}
+        setShowPassword={setShowPassword}
+      />
 
       <Picker
         selectedValue={instituteType}
         style={styles.input}
         onValueChange={(itemValue) => setInstituteType(itemValue)}
+        accessibilityLabel="Institute type picker"
       >
         <Picker.Item label="Select" value="" />
         <Picker.Item label="Institute 1" value="institute1" />
@@ -65,49 +100,29 @@ export default function SignUp() {
         <Picker.Item label="Institute 3" value="institute3" />
       </Picker>
 
-      <View style={styles.checkboxContainer}>
-        <Checkbox
-          value={isChecked}
-          onValueChange={setIsChecked}
-          style={styles.checkbox}
-        />
-        <Text style={styles.checkboxText}>
-          Agree with <Text style={styles.linkText}>Terms & condition</Text>
-        </Text>
-      </View>
+      <CheckboxWithLabel
+        isChecked={isChecked}
+        setIsChecked={setIsChecked}
+      />
 
       <TouchableOpacity
         style={[styles.signUpButton, { opacity: isChecked ? 1 : 0.5 }]}
         disabled={!isChecked}
-        onPress={handleSignUp} // Use the handleSignUp function
+        onPress={handleSignUp}
+        accessibilityLabel="Sign up button"
       >
         <Text style={styles.signUpButtonText}>Sign Up</Text>
       </TouchableOpacity>
 
       <Text style={styles.orText}>Or sign up with</Text>
       
-      <View style={styles.socialIconsContainer}>
-        <TouchableOpacity>
-          <Image
-            source={appleIcon}
-            style={styles.socialIcon}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Image
-            source={googleIcon}
-            style={styles.socialIcon}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Image
-            source={facebookIcon}
-            style={styles.socialIcon}
-          />
-        </TouchableOpacity>
-      </View>
+      <SocialSignUp />
 
-      <TouchableOpacity style={styles.signInContainer}>
+      <TouchableOpacity
+        style={styles.signInContainer}
+        onPress={() => navigation.navigate('SignIn')}
+        accessibilityLabel="Navigate to sign in"
+      >
         <Text style={styles.signInText}>
           Already have an account? <Text style={styles.signInLink}>Sign In</Text>
         </Text>
@@ -115,7 +130,6 @@ export default function SignUp() {
     </View>
   );
 }
-
 
 const styles = StyleSheet.create({
   container: {

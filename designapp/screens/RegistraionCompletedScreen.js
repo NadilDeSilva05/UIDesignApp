@@ -1,18 +1,16 @@
 import React, { useEffect, useRef } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ImageBackground, StatusBar, Animated } from 'react-native';
-import { useNavigation } from '@react-navigation/native'; // Import the useNavigation hook
+import { useNavigation } from '@react-navigation/native';
 
 export default function RegistrationCompletedScreen() {
-  const navigation = useNavigation(); // Initialize navigation
+  const navigation = useNavigation(); 
 
-  // Create animated values for each step
   const fadeAnim1 = useRef(new Animated.Value(0)).current;
   const fadeAnim2 = useRef(new Animated.Value(0)).current;
   const fadeAnim3 = useRef(new Animated.Value(0)).current;
   const fadeAnim4 = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
-    // Animate the fade-in effect sequentially
     Animated.sequence([
       Animated.timing(fadeAnim1, {
         toValue: 1,
@@ -37,14 +35,13 @@ export default function RegistrationCompletedScreen() {
     ]).start();
   }, [fadeAnim1, fadeAnim2, fadeAnim3, fadeAnim4]);
 
-  // Handle navigation when the "Understood" button is clicked
   const handleUnderstoodPress = () => {
-    navigation.navigate('StepOneScreen'); // Navigate to StepOneScreen
+    navigation.navigate('StepOneScreen');
   };
 
   return (
     <ImageBackground
-      source={require('../assets/welcome.jpg')} // Replace with the correct path to your image
+      source={require('../assets/welcome.jpg')} 
       style={styles.background}
       resizeMode="cover"
     >
@@ -103,8 +100,6 @@ export default function RegistrationCompletedScreen() {
     </ImageBackground>
   );
 }
-
-
 
 const styles = StyleSheet.create({
   background: {

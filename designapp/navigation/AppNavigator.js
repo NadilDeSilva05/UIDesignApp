@@ -9,6 +9,7 @@ import RegistrationCompletedScreen from '../screens/RegistraionCompletedScreen'
 import StepOneScreen from '../screens/StepOneScreen';
 import StepTwoScreen from '../screens/StepTwoScreen';
 import StepThreeScreen from '../screens/StepThreeScreen';
+import Dashboard from '../screens/Dashboard';
 
 const Stack = createStackNavigator();
 
@@ -23,6 +24,8 @@ function AppNavigator() {
         <Stack.Screen name="StepOneScreen" component={StepOneScreen} />
         <Stack.Screen name="StepTwoScreen" component={StepTwoScreen} />
         <Stack.Screen name="StepThreeScreen" component={StepThreeScreen} />
+        <Stack.Screen name="Dashboard" component={Dashboard} />
+
 
 
 
