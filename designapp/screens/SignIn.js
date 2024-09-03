@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native'; // Import the hook
 
 // Import local images
 import appleIcon from '../assets/apple.png';
@@ -11,6 +12,12 @@ export default function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const navigation = useNavigation(); // Use the navigation hook
+
+  const handleSignIn = () => {
+    // Perform your sign-in logic here, then navigate to the dashboard
+    navigation.navigate('Dashboard');
+  };
 
   return (
     <View style={styles.container}>
@@ -44,7 +51,7 @@ export default function SignIn() {
         <Text style={styles.forgotPasswordText}>Forgot password?</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.signInButton}>
+      <TouchableOpacity style={styles.signInButton} onPress={handleSignIn}>
         <Text style={styles.signInButtonText}>Sign In</Text>
       </TouchableOpacity>
 
@@ -79,6 +86,9 @@ export default function SignIn() {
     </View>
   );
 }
+
+
+
 
 const styles = StyleSheet.create({
   container: {

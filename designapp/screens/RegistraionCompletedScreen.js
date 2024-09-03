@@ -1,7 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ImageBackground, StatusBar, Animated } from 'react-native';
+import { useNavigation } from '@react-navigation/native'; // Import the useNavigation hook
 
 export default function RegistrationCompletedScreen() {
+  const navigation = useNavigation(); // Initialize navigation
+
   // Create animated values for each step
   const fadeAnim1 = useRef(new Animated.Value(0)).current;
   const fadeAnim2 = useRef(new Animated.Value(0)).current;
@@ -33,6 +36,11 @@ export default function RegistrationCompletedScreen() {
       }),
     ]).start();
   }, [fadeAnim1, fadeAnim2, fadeAnim3, fadeAnim4]);
+
+  // Handle navigation when the "Understood" button is clicked
+  const handleUnderstoodPress = () => {
+    navigation.navigate('StepOneScreen'); // Navigate to StepOneScreen
+  };
 
   return (
     <ImageBackground
@@ -88,13 +96,15 @@ export default function RegistrationCompletedScreen() {
         </View>
 
         <View style={{ marginBottom: 260 }} />
-        <TouchableOpacity style={styles.understoodButton}>
+        <TouchableOpacity style={styles.understoodButton} onPress={handleUnderstoodPress}>
           <Text style={styles.understoodButtonText}>Understood!</Text>
         </TouchableOpacity>
       </View>
     </ImageBackground>
   );
 }
+
+
 
 const styles = StyleSheet.create({
   background: {
