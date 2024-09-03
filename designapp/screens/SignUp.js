@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Picker } from '@react-native-picker/picker';
-import Checkbox from 'expo-checkbox'; // or '@react-native-community/checkbox'
+import Checkbox from 'expo-checkbox';
+import { useNavigation } from '@react-navigation/native';
 
 // Import local images
 import appleIcon from '../assets/apple.png';
@@ -15,6 +16,14 @@ export default function SignUp() {
   const [instituteType, setInstituteType] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
+
+  const navigation = useNavigation();
+
+  const handleSignUp = () => {
+    // Add your sign-up logic here
+    // After successful sign-up, navigate to RegistrationCompletedScreen
+    navigation.navigate('RegistrationCompletedScreen');
+  };
 
   return (
     <View style={styles.container}>
@@ -70,6 +79,7 @@ export default function SignUp() {
       <TouchableOpacity
         style={[styles.signUpButton, { opacity: isChecked ? 1 : 0.5 }]}
         disabled={!isChecked}
+        onPress={handleSignUp} // Use the handleSignUp function
       >
         <Text style={styles.signUpButtonText}>Sign Up</Text>
       </TouchableOpacity>
@@ -105,6 +115,7 @@ export default function SignUp() {
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
